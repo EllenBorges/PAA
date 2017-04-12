@@ -110,6 +110,10 @@ void Imprime(TItem *A, int k){
         ImprimeVetor(A[j].vetor, A[j].tamanho);
     }
 }
+void RemoveMin(TItem *A, int k){
+
+
+}
 
 int main(){
 
@@ -130,25 +134,6 @@ int main(){
 	heapSort(A, k);
 	printf("\nHeapsort\n");
 	Imprime(A, k);
-
-
-
-
-
-
-
-/*
-    TItem *A;
-	int n;
-
-	n = Carrega(&A);
-	heapRefaz(A, 0, n-1);
-	Imprime(A, n);
-	heapConstroi(A, n);
-	Imprime(A, n);
-	heapSort(A, n);
-	Imprime(A, n);
-	*/
 	Libera(&A);
 
 	return 0;
