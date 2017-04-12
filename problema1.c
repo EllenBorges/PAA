@@ -5,10 +5,12 @@
 typedef int TChave;
 
 typedef struct {
-	TChave Chave;
-	/* outros compomentes */
-} TItem;
+	int *vetor;
+	int min;
+	int tamanho;
 
+}TItem;
+/*
 int Carrega(TItem **A)
 {
 	int i, n;
@@ -19,10 +21,13 @@ int Carrega(TItem **A)
 		(*A) = (TItem *) malloc(n * sizeof(TItem));
 		for (i = 0; i < n ; i++)
 			scanf("%d", &(*A)[i].Chave);
+			(*A)[i].tam = n;
+
 	}
 	else
 		(*A) = NULL;
-
+    printf("%d",(*A)[0]->tam);
+  //  Imprime((*A),();
 	return n;
 }
 
@@ -100,18 +105,55 @@ void heapSort(TItem *A, int n)
 
 }
 
-int main()
+*/
+void ImprimeVetor(int *A, int n)
 {
+	int i;
+	if (n > 0) {
+		printf("%d", A[0]);
+		for (i = 1; i < n; i++)
+			printf(" %d", A[i]);
+		printf("\n");
+	}
+}
 
-	int k,i,j,n;
-	TItem **A;
-	scanf("%d",&k);
-	A = (TItem**)malloc(sizeof(TItem*));
 
-    for(j=0; j<k; j++){
-          n = Carrega(&A[j]);
+int main(){
 
+	int k,i,j,n,p;
+	int tam;
+
+	TItem *A;
+
+
+
+	scanf("%d %d",&k, &i);
+	A = (TItem*)malloc((k)*sizeof(TItem));
+
+
+    for (j = 0; j < k; j++){
+        scanf("%d", &tam);
+        A[j].tamanho = tam;
+        if (tam == 0){
+            A[j].min = -1;
+            A[j].vetor = NULL;
+        }else{
+            int *temp = (int*)malloc((tam)*sizeof(int));
+            for (p = 0; p < tam; p++ ){
+                scanf("%d", &temp[p]);
+            }
+            A[j].vetor = temp;
+            A[j].min = 0;
+        }
     }
+
+    for (j = 0; j < k; j++){
+        ImprimeVetor(A[j].vetor, A[j].tamanho);
+    }
+
+
+
+
 
 
 
@@ -127,7 +169,7 @@ int main()
 	heapSort(A, n);
 	Imprime(A, n);
 	*/
-	Libera(&A);
+	//Libera(&A);
 
 	return 0;
 }
