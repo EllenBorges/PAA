@@ -6,10 +6,13 @@ typedef int TChave;
 
 typedef struct {
 	int *vetor;
-	int min;
+	int id_min;
 	int tamanho;
 
 }TItem;
+
+
+//salva os valores nos k vetores
 
 void Carrega(TItem *A, int k){
     int j, p,tam;
@@ -18,7 +21,7 @@ void Carrega(TItem *A, int k){
         scanf("%d", &tam);
         A[j].tamanho = tam;
         if (tam == 0){
-            A[j].min = -1;
+            A[j].id_min = -1;
             A[j].vetor = NULL;
         }else{
             int *temp = (int*)malloc((tam)*sizeof(int));
@@ -26,12 +29,12 @@ void Carrega(TItem *A, int k){
                 scanf("%d", &temp[p]);
             }
             A[j].vetor = temp;
-            A[j].min = 0;
+            A[j].id_min = 0;
         }
     }
 
 }
-/*
+
 void Libera(TItem **A)
 {
 	if ((*A) != NULL) {
@@ -40,31 +43,20 @@ void Libera(TItem **A)
 	}
 }
 
-void Imprime(TItem *A, int n)
-{
-	int i;
-	if (n > 0) {
-		printf("%d", A[0].Chave);
-		for (i = 1; i < n; i++)
-			printf(" %d", A[i].Chave);
-		printf("\n");
-	}
-}
-
 void heapRefaz(TItem *A, int esq, int dir)
 {
-	// Implemente o seu metodo aqui!
     TItem aux;
-    int i, j;
+    int i, j,id_min;
 
     i = esq;
     j = i * 2 + 1;              // j = primeiro filho de i
     aux = A[i];                 // aux = no i (pai de j)
     while(j<=dir){
+        id_min = A[j].id_min;
 
-        if ((j < dir) && (A[j].Chave < A[j+1].Chave))
+        if ((j < dir) && (A[j].vetor[id_min] < A[j+1].vetor[id_min]))
             j++;                // j  recebe o outro filho de i
-        if (aux.Chave >= A[j].Chave)
+        if (aux.vetor[id_min] >= A[j].vetor[id_min])
             break;             // heap foi refeito corretamente
         A[i] = A[j];
         i = j;
@@ -74,11 +66,8 @@ void heapRefaz(TItem *A, int esq, int dir)
 
 }
 
-void heapConstroi(TItem *A, int n)
-{
-	// Implemente o seu metodo aqui!
+void heapConstroi(TItem *A, int n){
 	int esq;
-
 	esq = (n/2) - 1;
 	while(esq >= 0){
         heapRefaz(A, esq, n-1);
@@ -87,14 +76,11 @@ void heapConstroi(TItem *A, int n)
 
 }
 
-void heapSort(TItem *A, int n)
-{
-	// Implemente o seu metodo aqui!
+void heapSort(TItem *A, int n){
+
     TItem aux;
     int m;
-
     heapConstroi(A, n);
-
     m = n - 1;
     while(m > 0){
         aux = A[m];
@@ -106,7 +92,7 @@ void heapSort(TItem *A, int n)
 
 }
 
-*/
+
 void ImprimeVetor(int *A, int tam)
 {
 	int i;
@@ -130,14 +116,20 @@ int main(){
 	int k,i,n,j;
 
 	TItem *A;
-
-
-
 	scanf("%d %d",&k, &i);
 	A = (TItem*)malloc((k)*sizeof(TItem));
 	Carrega(A,k);
     Imprime(A,k);
 
+    heapRefaz(A, 0, k-1);
+    printf("\nHeapRefaz\n");
+	Imprime(A, k);
+	heapConstroi(A, k);
+	printf("\nHeapConstroi\n");
+	Imprime(A, k);
+	heapSort(A, k);
+	printf("\nHeapsort\n");
+	Imprime(A, k);
 
 
 
@@ -157,7 +149,7 @@ int main(){
 	heapSort(A, n);
 	Imprime(A, n);
 	*/
-	//Libera(&A);
+	Libera(&A);
 
 	return 0;
 }
