@@ -1,4 +1,6 @@
-
+/* Ellen Priscila Borges Oliveira RA 69554
+PAA 2017 - Problema 1
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -110,30 +112,73 @@ void Imprime(TItem *A, int k){
         ImprimeVetor(A[j].vetor, A[j].tamanho);
     }
 }
-void RemoveMin(TItem *A, int k){
+
+void ImprimeResposta(TItem *A, int k){
+    int j;
+    for (j = 0; j < k; j++){
+        printf(" %d ", A[j].vetor[0]);
+    }
+
+}
+int RemoveMin(TItem *A, int k){
+    int i;
+    if(A!=NULL){
+         if(A[0].tamanho==1){
+
+           for(i=0; i<k;i++){
+                A[i] = A[i+1];
+
+            }
+           return 1;
+
+        }
+        else if(A[0].tamanho>1){
+            for(i=0; i<A[0].tamanho;i++){
+                A[0].vetor[i] = A[0].vetor[i+1];
+            }
+            A[0].tamanho--;
+            return -1;
+
+        }
+        else return 0;
+
+    }
 
 
 }
 
 int main(){
 
-	int k,i,n,j;
+	int k,i,n,j,resp;
 
 	TItem *A;
 	scanf("%d %d",&k, &i);
 	A = (TItem*)malloc((k)*sizeof(TItem));
 	Carrega(A,k);
     Imprime(A,k);
-
-    heapRefaz(A, 0, k-1);
-    printf("\nHeapRefaz\n");
-	Imprime(A, k);
-	heapConstroi(A, k);
-	printf("\nHeapConstroi\n");
-	Imprime(A, k);
-	heapSort(A, k);
-	printf("\nHeapsort\n");
-	Imprime(A, k);
+    for(j=0; j<i-1; j++){
+        if(k>0){
+            heapRefaz(A, 0, k-1);
+            //printf("\nHeapRefaz\n");
+            //Imprime(A, k);
+            heapConstroi(A, k);
+            //printf("\nHeapConstroi\n");
+            //Imprime(A, k);
+            heapSort(A, k);
+            //printf("\nHeapsort\n");
+            //Imprime(A, k);
+             resp= RemoveMin(A,k);
+             if(resp>0) k--;
+        }
+    }
+    if(k>0){
+        heapRefaz(A, 0, k-1);
+        heapConstroi(A, k);
+        heapSort(A, k);;
+        printf("\n imprimindo resposta final\n ");
+       // Imprime(A,k);
+        ImprimeResposta(A,k);
+    }
 	Libera(&A);
 
 	return 0;
