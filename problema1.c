@@ -135,6 +135,7 @@ int RemoveMin(TItem *A, int k){
                 A[0].vetor[i] = A[0].vetor[i+1];
             }
             A[0].tamanho--;
+            A[0].id_min++;
             return -1;
 
         }
@@ -155,7 +156,7 @@ int main(){
 	Carrega(A,k);
     //Imprime(A,k);
     for(j=0; j<i-1; j++){
-       // if(k>1){
+
             heapRefaz(A, 0, k-1);
             //printf("\nHeapRefaz\n");
             //Imprime(A, k);
@@ -167,13 +168,12 @@ int main(){
             //Imprime(A, k);
              resp = RemoveMin(A,k);
              if(resp>0) k--;
-       // }
+
     }
     if(k>1){
         heapRefaz(A, 0, k-1);
         heapConstroi(A, k);
         heapSort(A, k);;
-       // Imprime(A,k);
 
     }
     ImprimeResposta(A,k);
