@@ -155,9 +155,9 @@ int main(){
 	scanf("%d %d",&k, &i);
 	A = (TItem*)malloc((k)*sizeof(TItem));
 	Carrega(A,k);
-    Imprime(A,k);
+    //Imprime(A,k);
     for(j=0; j<i-1; j++){
-        if(k>0){
+       // if(k>1){
             heapRefaz(A, 0, k-1);
             //printf("\nHeapRefaz\n");
             //Imprime(A, k);
@@ -167,18 +167,18 @@ int main(){
             heapSort(A, k);
             //printf("\nHeapsort\n");
             //Imprime(A, k);
-             resp= RemoveMin(A,k);
+             resp = RemoveMin(A,k);
              if(resp>0) k--;
-        }
+       // }
     }
-    if(k>0){
+    if(k>1){
         heapRefaz(A, 0, k-1);
         heapConstroi(A, k);
         heapSort(A, k);;
-        printf("\n imprimindo resposta final\n ");
        // Imprime(A,k);
-        ImprimeResposta(A,k);
+
     }
+    ImprimeResposta(A,k);
 	Libera(&A);
 
 	return 0;
