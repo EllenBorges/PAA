@@ -116,7 +116,7 @@ void Imprime(TItem *A, int k){
 void ImprimeResposta(TItem *A, int k){
     int j;
     for (j = 0; j < k; j++){
-        printf(" %d ", A[j].vetor[0]);
+        printf("%d ", A[j].vetor[0]);
     }
 
 }
