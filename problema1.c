@@ -4,8 +4,6 @@ PAA 2017 - Problema 1
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef int TChave;
-
 typedef struct {
 	int *vetor;
 	int id_min;
